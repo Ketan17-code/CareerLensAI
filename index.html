@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareerLens AI | Resume Analyzer</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header class="nav">
+  <div class="brand"><span class="logo">✦</span> CareerLens <b>AI</b></div>
+  <span class="badge">NLP • ML • ATS</span>
+</header>
+
+<main class="container">
+<section class="hero">
+  <div>
+    <p class="eyebrow">AI-POWERED CAREER INSIGHTS</p>
+    <h1>Turn your resume into a <span>career strategy.</span></h1>
+    <p class="sub">Upload your resume and get explainable AI insights, role prediction, skill gaps and ATS-style feedback in seconds.</p>
+  </div>
+  <div class="hero-card">
+    <div class="mini-ring">AI</div>
+    <div><strong>Smart Analysis</strong><small>TF-IDF + ML + NLP</small></div>
+  </div>
+</section>
+
+<section class="panel upload-panel">
+<form id="resumeForm">
+  <div class="dropzone" id="dropzone">
+    <input type="file" id="resume" name="resume" accept=".pdf,.docx,.txt" hidden>
+    <div class="upload-icon">↑</div>
+    <h3>Drop your resume here</h3>
+    <p>or <button type="button" class="browse" id="browse">browse files</button></p>
+    <small>PDF, DOCX or TXT • Max 5 MB</small>
+    <div id="fileName" class="file-name"></div>
+  </div>
+  <div class="controls">
+    <label>Target Job Role
+      <select name="role" id="role">
+        <option>AI/ML Engineer</option><option>Data Scientist</option>
+        <option>Web Developer</option><option>Software Developer</option>
+        <option>Data Analyst</option><option>Cyber Security</option><option>Cloud Engineer</option>
+      </select>
+    </label>
+    <button class="analyze-btn" type="submit"><span>Analyze Resume</span> →</button>
+  </div>
+</form>
+<div id="loading" class="loading hidden">Analyzing resume with CareerLens AI...</div>
+<div id="error" class="error hidden"></div>
+</section>
+
+<section id="results" class="hidden">
+  <div class="result-head">
+    <div><p class="eyebrow">ANALYSIS COMPLETE</p><h2>Your CareerLens Report</h2><p id="fileLabel"></p></div>
+    <button class="ghost" onclick="window.print()">Print Report</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><small>RESUME SCORE</small><strong id="score">—</strong><span>/ 100</span></div>
+    <div class="stat"><small>JOB MATCH</small><strong id="match">—</strong><span>%</span></div>
+    <div class="stat"><small>ATS SCORE</small><strong id="ats">—</strong><span>/ 100</span></div>
+    <div class="stat"><small>WORDS</small><strong id="words">—</strong></div>
+  </div>
+
+  <div class="grid">
+    <div class="card prediction">
+      <div class="card-title"><span>🤖</span> Predicted Career Role</div>
+      <h3 id="predicted">—</h3>
+      <div class="confidence"><div class="bar"><i id="confBar"></i></div><span id="confidence">—</span> confidence</div>
+      <p>Target role: <b id="target">—</b></p>
+    </div>
+    <div class="card chart-card">
+      <div class="card-title"><span>◉</span> Skill Match Overview</div>
+      <canvas id="skillChart"></canvas>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-title"><span>✓</span> Detected Skills</div>
+      <div id="skills" class="chips"></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span>⚠</span> Skill Gaps</div>
+      <div id="missing" class="chips"></div>
+    </div>
+  </div>
+
+  <div class="card recommendations">
+    <div class="card-title"><span>✦</span> AI Recommendations</div>
+    <div id="suggestions"></div>
+  </div>
+</section>
+</main>
+<footer>CareerLens AI • Educational AI/ML project • Results are advisory, not hiring decisions.</footer>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
